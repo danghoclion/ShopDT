@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.AspNetCore.Http;
+@using ShopDT.Models;
+@using Newtonsoft.Json;
+@using System.Text.Json;
+@using ShopDT;
+
+@{
+    var json = Context.Session.GetString("user");
+    Khachhang kh = null;
+    if (json != null)
+         kh = JsonConvert.DeserializeObject<Khachhang>(json);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,26 +23,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>pomato</title>
+    <title>Shop bán điện thoại</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!-- Responsive-->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     <!-- fevicon -->
-    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <link rel="icon" href="/images/fevicon.png" type="image/gif" />
     <!-- Scrollbar Custom CSS -->
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
     <!-- Tweaks for older IEs-->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <!-- owl stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -39,7 +53,7 @@
 <body class="main-layout ">
     <!-- loader  -->
     <div class="loader_bg">
-        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+        <div class="loader"><img src="/images/loading.gif" alt="#" /></div>
     </div>
     <!-- end loader -->
     <!-- header -->
@@ -53,7 +67,7 @@
                         <div class="full">
                             <div class="center-desk">
                                 <div class="logo">
-                                    <a href="index.html"><img src="images/logo.png" alt="#"></a>
+                                    <a href="index.html"><img src="/images/logo.png" alt="#"></a>
                                 </div>
                             </div>
                         </div>
@@ -63,13 +77,13 @@
                             <div class="limit-box">
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
-                                        <li class="active"> <a href="index.html">Home</a> </li>
-                                        <li> @Html.ActionLink("About", "About", "Home") </li>
-                                        <li> @Html.ActionLink("Brand", "Brand", "Home") </li>
-                                        <li> @Html.ActionLink("Specials", "Specials", "Home") </li>
-                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li> @Html.ActionLink("Home", "Index", "Home") </li>
+                                        <li><a href="#">About</a></li>
+                                        <li> @Html.ActionLink("Products", "Index", "Sanphams") </li>
+                                        <li><a href="#">Specials</a></li>
+                                        <li><a href="#">Contact Us</a></li>
                                         <li class="last">
-                                            <a href="#"><img src="images/search_icon.png" alt="icon" /></a>
+                                            <a href="#"><img src="/images/search_icon.png" alt="icon" /></a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -79,9 +93,31 @@
                     <div class="col-md-6 offset-md-6">
                         <div class="location_icon_bottum">
                             <ul>
-                                <li><img src="icon/call.png" />(+71)9876543109</li>
-                                <li><img src="icon/email.png" />demo@gmail.com</li>
-                                <li><img src="icon/loc.png" />Location</li>
+                                @if (Context.Session.GetString("user") != null)
+                                {
+                                    <li>
+                                        Hello @kh.TenKhachHang
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Logout", "Logout", "Login")
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <img src="/icon/login.png" width="27" height="23" />
+                                        @Html.ActionLink("Login", "Login", "Login")
+                                    </li>
+                                    <li>
+                                        <img src="/icon/register.png" width="27" height="23" />
+                                        @Html.ActionLink("Register", "Register", "Login")
+                                    </li>
+                                }
+                            <li></li>
+                                <li></li>
+                            <li>
+                                @Html.ActionLink("Cart", "GetGiohang", "DonHang")
+                            </li>
                             </ul>
                         </div>
                     </div>
@@ -130,23 +166,23 @@
             </div>
             <div class="copyright">
                 <div class="container">
-                    <p>© 2019 All Rights Reserved. Design By<a href="https://html.design/"> Free Html Templates</a></p>
+                    <p>© 2019 All Rights Reserved. Design By<a href="https://html.design/"> @ViewData["user"]</a></p>
                 </div>
             </div>
         </div>
     </footer>
     <!-- end footer -->
     <!-- Javascript files-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/plugin.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery-3.0.0.min.js"></script>
+    <script src="/js/plugin.js"></script>
     <!-- sidebar -->
-    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/js/custom.js"></script>
     <!-- javascript -->
-    <script src="js/owl.carousel.js"></script>
+    <script src="/js/owl.carousel.js"></script>
     <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
     <script>
         $(document).ready(function () {
