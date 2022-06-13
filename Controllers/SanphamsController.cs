@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopDT.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ShopDT.Controllers
 {
@@ -13,10 +14,11 @@ namespace ShopDT.Controllers
     {
         QLDienThoaiContext _context = new QLDienThoaiContext();
 
-        // GET: Sanphams
-        public async Task<IActionResult> Index()
-        {
 
+
+        // GET: Sanphams
+        public IActionResult Index()
+        {
             return View(_context.Sanphams);
         }
 

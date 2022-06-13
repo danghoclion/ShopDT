@@ -1,67 +1,38 @@
 ﻿@model ShopDT.Models.Sanpham
-
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!--<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenSanPham)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Anh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MoTa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GiaTien)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoLuong)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaDanhMucNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => model.TenSanPham)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Anh)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.MoTa)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.GiaTien)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.SoLuong)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.MaDanhMucNavigation.MaDanhMuc)
-                </td>-->
-                @*<td>
-                    <a asp-action="Edit" asp-route-id="@model.MaSanPham">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@model.MaSanPham">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@model.MaSanPham">Delete</a>
-                </td>*@
-            <!--</tr>
-        }
-    </tbody>
-</table>-->
+<div class="brand">
+    <div class="container">
 
-@*<div>
-    <a asp-action="Edit" asp-route-id="@Model.MaSanPham">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>*@
+    </div>
+    <div class="brand-bg" style="text-align:center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
+                    <div class="brand_box">
+                        <span style="font-size: 1.17em">
+                            <b>Thông tin chi tiết sản phẩm</b>
+                        </span>
+                        <img src="/images/@Model.Anh" alt="img" />
+                        <span>Tên sản phẩm: @Model.TenSanPham</span>
+                        <span>Mã sản phẩm: @Model.MaSanPham</span>
+                        <span>Hãng sản xuất: @Model.MaDanhMucNavigation.TenDanhMuc</span>
+                        <span>Mô tả: @Model.MoTa</span>
+                        <i><img src="/images/star.png" /></i>
+                        <i><img src="/images/star.png" /></i>
+                        <i><img src="/images/star.png" /></i>
+                        <i><img src="/images/star.png" /></i>
+                        <h4>Giá: <strong class="red">">@String.Format("{0:0,0}", Model.GiaTien)  VND</strong></h4>
+                        <div class="col-md-12">
+                            <a class="read-more">Mua hàng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
