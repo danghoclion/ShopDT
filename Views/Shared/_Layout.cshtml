@@ -9,7 +9,7 @@
     var json = Context.Session.GetString("user");
     Khachhang kh = null;
     if (json != null)
-         kh = JsonConvert.DeserializeObject<Khachhang>(json);
+        kh = JsonConvert.DeserializeObject<Khachhang>(json);
 }
 
 <!DOCTYPE html>
@@ -113,11 +113,11 @@
                                         @Html.ActionLink("Register", "Register", "Login")
                                     </li>
                                 }
-                            <li></li>
                                 <li></li>
-                            <li>
-                                @Html.ActionLink("Cart", "GetGiohang", "DonHang")
-                            </li>
+                                <li></li>
+                                <li>
+                                    @Html.ActionLink("Cart", "GetGiohang", "DonHang")
+                                </li>
                             </ul>
                         </div>
                     </div>
